@@ -1,0 +1,41 @@
+{% extends 'baseTemplate.html' %}
+
+{% block content %}
+
+    <table>
+    <thead>
+        <tr>
+            <th>Team One</th>
+            <th>Team Two</th>
+            <th>Winner</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for match in matches %}
+        <tr>
+            <td>{{ match.team_one.name }}</td>
+            <td>{{ match.team_two.name }}</td>
+            <td>{% if match.winner == "tie" %}No Result{% elif match.winner == None %}To be played{% else %}{{ match.winner }}{% endif %}</td>
+            <td>
+                <form method="POST" action="/cricket/matches">
+                    <select name="winner">
+                        <option value="">Select Team Won</option>
+                        <option value="{{ match.team_one.id }}">{{ match.team_one.name }}</option>
+                        <option value="{{ match.team_two.id }}">{{ match.team_two.name }}</option>
+                        <option value="tie">Match Tie</option>
+                    </select>
+
+                    <input type="hidden" name="match_id" value="{{ match.id }}">
+
+                    <input type="submit" value="Submit">
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+
+    </table>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'baseTemplate.html' %}
+
+{% block content %}
+
+
+    <form method="POST" action="/cricket/teams/" name="teamInput" id="teamInput">
+
+        {% csrf_token %}
+
+        <input type="text" name="name">
+
+        <input type="text" name="club_state">
+
+        <input type="submit" value="Submit">
+
+    </form>
+
+
+    <form method="GET" action="/cricket/teams/">
+    {% csrf_token %}
+        <input type="submit" value="View Teams">
+    </form>
+
+    <form method="POST" action="/cricket/players/">
+
+        {% csrf_token %}
+
+        <input type="text" name="first_name">
+
+        <input type="text" name="last_name">
+
+        <input type="number" name="jersey_number">
+
+        <input type="text" name="country">
+
+        <input type="number" name="matches">
+
+        <input type="number" name="runs">
+
+        <input type="number" name="highest_runs">
+
+        <input type="number" name="fifties">
+
+        <input type="number" name="hundreds">
+
+        <input type="submit" value="Submit">
+
+    </form>
+
+
+    <form method="GET" action="/cricket/players/">
+    {% csrf_token %}
+        <input type="submit" value="View Players">
+    </form>
+
+    <form method="GET" action="/cricket/matches/">
+    {% csrf_token %}
+        <input type="submit" value="View Matches">
+    </form>
+
+    <form method="GET" action="/cricket/points-table/">
+    {% csrf_token %}
+        <input type="submit" value="View Points Table">
+    </form>
+
+{% endblock content %}

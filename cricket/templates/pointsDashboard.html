@@ -1,0 +1,33 @@
+{% extends 'baseTemplate.html' %}
+
+{% block content %}
+
+    <table>
+    <thead>
+        <tr>
+            <th>Team Name</th>
+            <th>Total Matches</th>
+            <th>Won</th>
+            <th>Lost</th>
+            <th>Tie</th>
+            <th>Points</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for team_points in teams_points %}
+        <tr>
+            <td>{{ team_points.team_name.name }}</td>
+            <td>{{ team_points.total_matches }}</td>
+            <td>{{ team_points.won_matches }}</td>
+            <td>{{ team_points.lost_matches }}</td>
+            <td>{{ team_points.tie_matches }}</td>
+            <td>{{ team_points.points }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+
+    </table>
+
+{% endblock %}
+
