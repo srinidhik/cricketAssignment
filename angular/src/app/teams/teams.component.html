@@ -1,0 +1,36 @@
+<div fxLayout="row" fxFlex="80">
+<div fxLayout="column" fxLayoutAlign="center center">
+  <table mat-table [dataSource]="teams">
+
+    <ng-container matColumnDef="logo_uri">
+      <th mat-header-cell *matHeaderCellDef> logo_uri </th>
+      <td mat-cell *matCellDef="let element">
+        <img src="{{apiHostUrl}}{{element.fields.logo_uri}}" class="image-logo">
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.fields.name}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="club_state">
+      <th mat-header-cell *matHeaderCellDef> Club state </th>
+      <td mat-cell *matCellDef="let element"> {{element.fields.club_state}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="view_players">
+      <th mat-header-cell *matHeaderCellDef> View Players </th>
+      <td mat-cell *matCellDef="let element"> 
+          <button align="center" mat-stroked-button color="primary" (click)="viewPlayers(element.pk)">
+            View {{element.fields.name}} players
+          </button>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+</div>

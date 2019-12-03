@@ -1,0 +1,30 @@
+{{player.player}}
+
+<mat-card>
+
+    <mat-card-content>
+
+      <form fxLayout="column" [formGroup]="playerForm">
+        <mat-form-field>
+          <input matInput formControlName="matches" type="number" placeholder="Matches">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput formControlName="runs" type="number" placeholder="Runs">
+        </mat-form-field>
+        <br>
+  
+      </form>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+
+      <button align="center" 
+          mat-stroked-button color="primary" (click)="updatePlayer(player.player.id)">
+          Save
+      </button>
+
+    </mat-card-actions>
+
+  </mat-card>

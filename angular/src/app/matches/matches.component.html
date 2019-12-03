@@ -1,0 +1,46 @@
+<table mat-table [dataSource]="matches">
+
+  <ng-container matColumnDef="team_one_name">
+    <th mat-header-cell *matHeaderCellDef> Team One </th>
+    <td mat-cell *matCellDef="let element"> {{element.team_one_name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="team_two_name">
+    <th mat-header-cell *matHeaderCellDef> Team Two </th>
+    <td mat-cell *matCellDef="let element"> {{element.team_two_name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="winner">
+    <th mat-header-cell *matHeaderCellDef> Winner </th>
+    <td mat-cell *matCellDef="let element">
+       <div *ngIf="element.winner == 'tie'">
+          No Result
+       </div>
+       <div *ngIf="element.winner == null">
+          <form [formGroup]="winnerForm">
+              <mat-form-field>
+                  <mat-select formControlName="winner">
+                    <mat-option value="{{element.team_one_id}}">{{element.team_one_name}}</mat-option>
+                    <mat-option value="{{element.team_two_id}}">{{element.team_two_name}}</mat-option>
+                    <mat-option value="tie">Match Tie</mat-option>
+                  </mat-select>
+                </mat-form-field>
+          </form>
+          <button align="center" 
+            mat-stroked-button color="primary" (click)="submitWinner(element.id)">
+            Submit
+        </button>
+       </div>
+       <div *ngIf="element.winner != 'tie' && element.winner != null">
+          {{element.winner}}
+       </div>
+
+
+
+    </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

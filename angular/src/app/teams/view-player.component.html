@@ -1,0 +1,57 @@
+<table mat-table [dataSource]="players">
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.first_name}} {{element.last_name}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="team">
+          <th mat-header-cell *matHeaderCellDef> Club state </th>
+          <td mat-cell *matCellDef="let element"> {{element.team}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="jersey_number">
+          <th mat-header-cell *matHeaderCellDef> Jersey Number </th>
+          <td mat-cell *matCellDef="let element"> {{element.jersey_number}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="country">
+          <th mat-header-cell *matHeaderCellDef> Country </th>
+          <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="matches">
+          <th mat-header-cell *matHeaderCellDef> Matches </th>
+          <td mat-cell *matCellDef="let element"> {{element.matches}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="runs">
+          <th mat-header-cell *matHeaderCellDef> Runs </th>
+          <td mat-cell *matCellDef="let element"> {{element.runs}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="highest_runs">
+          <th mat-header-cell *matHeaderCellDef> Highest Runs </th>
+          <td mat-cell *matCellDef="let element"> {{element.highest_runs}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="fifties">
+          <th mat-header-cell *matHeaderCellDef> Fifties </th>
+          <td mat-cell *matCellDef="let element"> {{element.fifties}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="hundreds">
+          <th mat-header-cell *matHeaderCellDef> Hundreds </th>
+          <td mat-cell *matCellDef="let element"> {{element.hundreds}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="image_uri">
+          <th mat-header-cell *matHeaderCellDef> image_uri </th>
+          <td mat-cell *matCellDef="let element">
+            <img src="{{apiHostUrl}}{{element.image_uri}}" class="image-logo">
+          </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
