@@ -118,9 +118,9 @@ class PlayersDashboard(APIView):
                 updated_runs = player_data[0].runs + runs
                 fifties = player_data[0].fifties
                 hundreds = player_data[0].hundreds
-                if 50 < runs < 100:
+                if 50 <= runs < 100:
                     fifties += 1
-                elif runs > 100:
+                elif runs >= 100:
                     hundreds += 1
 
                 player_data.update(matches=matches,
@@ -128,7 +128,7 @@ class PlayersDashboard(APIView):
                                    highest_runs=highest_runs,
                                    fifties=fifties,
                                    hundreds=hundreds)
-                return Response({'result': "Updated Successfully"}, 200)
+                return Response({'result': "Updated Successfully", "updatedData": Players.objects.filter(id=player_id).values()}, 200)
         except Exception as e:
             return Response({'result': str(e)}, 500)
 
@@ -158,11 +158,12 @@ class MatchesDashboard(APIView):
             if result:
                 if not team_won == "tie":
                     team = Teams.objects.get(id=team_won)
-                    Matches.objects.filter(id=match_id).update(winner=team.name)
+                    winner = team.name
                 else:
-                    Matches.objects.filter(id=match_id).update(winner="tie")
+                    winner = "tie"
+                Matches.objects.filter(id=match_id).update(winner=winner)
 
-                return Response({'result': "Points updated"}, 200)
+                return Response({'result': "Points updated", "winner": winner}, 200)
             else:
                 return Response({'result': result.status_text}, 500)
         except Exception as e:

@@ -3,6 +3,7 @@ import { HttpService } from '../http.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Team } from './../team.model';
 import { Player } from './../player.model';
+import { CricketService } from '../cricket.service';
 
 @Component({
   selector: 'app-add-data',
@@ -16,9 +17,11 @@ export class AddDataComponent implements OnInit {
   public teams:any;
   private logo_uri:string;
   private image_uri:string;
+  public imageUrl = 'https://image.shutterstock.com/image-vector/camera-icon-trendy-flat-style-260nw-1017944869.jpg';
 
   constructor(private httpService:HttpService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private cricketService: CricketService) {
       this.teamForm = this.createTeamForm();
       this.playerForm = this.createPlayerForm();
      }
@@ -35,7 +38,10 @@ export class AddDataComponent implements OnInit {
     this.teamForm.value['logo_uri'] = this.logo_uri;
     this.httpService.postTeams(new Team(this.teamForm)).subscribe(
       response => {
-        alert(response);
+        this.cricketService.openSnackBar(response.result, "Success");
+      },
+      error => {
+        this.cricketService.openSnackBar(error.error.result, "Error");
       }
     )
   }
@@ -44,7 +50,10 @@ export class AddDataComponent implements OnInit {
     this.playerForm.value['image_uri'] = this.image_uri;
     this.httpService.postPlayers(new Player(this.playerForm)).subscribe(
       response => {
-        alert(response);
+        this.cricketService.openSnackBar(response.result, "Success");
+      },
+      error => {
+        this.cricketService.openSnackBar(error.error.result, "Error");
       }
     );
   }
@@ -73,17 +82,29 @@ export class AddDataComponent implements OnInit {
     });
   }
 
-  uploadImage(event, type){
+  async uploadImage(event, type: string){
+    
     console.log(event);
     let file = event.target.files[0];
     let reader = new FileReader();
+
     reader.readAsDataURL(file);
-    if(type=="team"){
-      this.logo_uri = reader.result.toString();
-    }else {
-      this.image_uri = reader.result.toString();
+    await this.delay(1000);
+    this.imageUrl = reader.result.toString();
+    if(this.imageUrl) {
+      if(type == "team"){
+        this.logo_uri = this.imageUrl;
+      } else {
+        this.image_uri = this.imageUrl;
+      }
+    } else {
+      this.cricketService.openSnackBar("Please Upload image", "Error");
     }
     
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 }

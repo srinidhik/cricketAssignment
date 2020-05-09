@@ -3,38 +3,16 @@
 
 
   <nav mat-tab-nav-bar>
-    <a mat-tab-link
-       routerLink="/teams"
-       active="isActive">
-       Teams
-    </a>
-
-    <a mat-tab-link
-       routerLink="/players"
-       active="isActive">
-       Players
-    </a>
-
-    <a mat-tab-link
-       routerLink="/matches"
-       active="isActive">
-       Matches
-    </a>
-
-    <a mat-tab-link
-       routerLink="/points"
-       active="isActive">
-       Points
-    </a>
-
-    <a mat-tab-link
-       routerLink="/add-data"
-       active="isActive">
-       Add Data
-    </a>
+      <a mat-tab-link
+         *ngFor="let link of navLinks"
+         [routerLink]="link.path"
+         routerLinkActive
+         #rla="routerLinkActive"
+         [routerLinkActiveOptions]="{exact: true}"
+         [active]="rla.isActive">
+      {{link.label}}
+      </a>
   </nav>
-
-
 
 </div>
 

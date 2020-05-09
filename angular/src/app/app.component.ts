@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'cricket-app';
+
+  public navLinks = [
+    {path: "/teams", label: "Teams"},
+    {path: "/players", label: "Players"},
+    {path: "/matches", label: "Matches"},
+    {path: "/points", label: "Points"},
+    {path: "/add-data", label: "Add Data"}
+  ];
+
 }

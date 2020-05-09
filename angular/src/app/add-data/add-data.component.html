@@ -16,11 +16,16 @@
             <input matInput formControlName="club_state" type="text" placeholder="Club State">
           </mat-form-field>
           <br>
-          <div>
-              <button type="button" md-button (click)="imgFileInput.click()">Add a photo</button>
-              <input hidden type="file" #imgFileInput (change)="uploadImage($event, 'team')"/>
+          <div class="avatar-upload">
+						<div class="avatar-edit">
+							<input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadImage($event)" />
+            </div>
+            <div class="avatar-preview">
+              <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+              </div>
+            </div>
           </div>
-    
+          <button mat-raised-button color="primary" (click)="fileInput.click()">Upload Image</button>
         </form>
 
       </mat-card-content>
@@ -93,10 +98,17 @@
           </mat-form-field>
           <br>
           <br>
-          <div>
-              <button type="button" md-button (click)="playerFileInput.click()">Add a photo</button>
-              <input hidden type="file" #playerFileInput (change)="uploadImage($event, 'player')"/>
-          </div>
+          <div class="avatar-upload">
+              <div class="avatar-edit">
+                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #playerFileInput (change)="uploadImage($event, 'player')" />
+              </div>
+              <div class="avatar-preview">
+                <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                </div>
+              </div>
+            </div>
+          <button mat-raised-button color="primary" (click)="playerFileInput.click()">Add a photo</button>
+          
     
         </form>
 

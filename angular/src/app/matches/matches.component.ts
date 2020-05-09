@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Winner } from './../winner.model';
+import { CricketService } from '../cricket.service';
 
 @Component({
   selector: 'app-matches',
@@ -15,7 +16,8 @@ export class MatchesComponent implements OnInit {
   displayedColumns: string[] = ['team_one_name', 'team_two_name', 'winner'];
 
   constructor(private httpService:HttpService,
-    private formBuilder: FormBuilder,) {
+    private formBuilder: FormBuilder,
+    private cricketService: CricketService) {
       this.winnerForm = this.createWinnerForm();
      }
 
@@ -27,11 +29,15 @@ export class MatchesComponent implements OnInit {
 
   }
 
-  submitWinner(id:number){
+  submitWinner(id:number, index: number){
     this.winnerForm.value["match_id"] = id;
     this.httpService.postWinner(new Winner(this.winnerForm)).subscribe(
       response => {
-        alert(response);
+        this.cricketService.openSnackBar(response.result, "Success");
+        this.matches[index]['winner'] = response.winner;
+      },
+      error => {
+        this.cricketService.openSnackBar(error.error.result, "Error");
       }
     )
   }
