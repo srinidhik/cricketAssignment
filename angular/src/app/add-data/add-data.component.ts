@@ -39,6 +39,7 @@ export class AddDataComponent implements OnInit {
     this.httpService.postTeams(new Team(this.teamForm)).subscribe(
       response => {
         this.cricketService.openSnackBar(response.result, "Success");
+	      this.teamForm.reset();
       },
       error => {
         this.cricketService.openSnackBar(error.error.result, "Error");
@@ -51,6 +52,7 @@ export class AddDataComponent implements OnInit {
     this.httpService.postPlayers(new Player(this.playerForm)).subscribe(
       response => {
         this.cricketService.openSnackBar(response.result, "Success");
+	      this.playerForm.reset();
       },
       error => {
         this.cricketService.openSnackBar(error.error.result, "Error");

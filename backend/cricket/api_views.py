@@ -29,7 +29,7 @@ class TeamsDashboard(APIView):
 
     def post(self, request):
         try:
-            data = request.DATA
+            data = request.data
             name = data.get("name", None)
             club_state = data.get("club_state", None)
 
@@ -76,7 +76,7 @@ class PlayersDashboard(APIView):
 
     def post(self, request):
         try:
-            data = request.DATA
+            data = request.data
             first_name = data.get("first_name", None)
             last_name = data.get("last_name", None)
             jersey_number = int(data.get("jersey_number") or 0)
@@ -149,7 +149,7 @@ class MatchesDashboard(APIView):
 
     def post(self, request):
         try:
-            data = request.DATA
+            data = request.data
             match_id = data.get("match_id")
             team_won = data.get("winner")
 

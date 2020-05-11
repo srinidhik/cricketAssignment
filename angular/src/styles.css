@@ -15,7 +15,3 @@ table {
     height: 100px;
 }
 
-.cdk-overlay-pane {
-    top: 0px !important;
-    margin-bottom: auto !important;
-}

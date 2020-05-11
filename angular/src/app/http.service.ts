@@ -41,7 +41,7 @@ public getTeams(): Observable<any> {
 }
 
 public getPlayers(id:number): Observable<any> {
-  const url = `${Urls.PLAYERS}/?team_id=${id}`;
+  const url = `${Urls.PLAYERS}?team_id=${id}`;
   return this.get<any>(url);
 }
 

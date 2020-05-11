@@ -1,3 +1,4 @@
+from _ast import mod
 from django.db import models
 
 class Teams(models.Model):
@@ -20,15 +21,15 @@ class Players(models.Model):
     highest_runs = models.IntegerField()
     fifties = models.IntegerField()
     hundreds = models.IntegerField()
-    team = models.ForeignKey("Teams")
+    team = models.ForeignKey("Teams", models.DO_NOTHING)
 
     class Meta:
         db_table = "Players"
 
 
 class Matches(models.Model):
-    team_one = models.ForeignKey("Teams")
-    team_two = models.ForeignKey("Teams", related_name="team1")
+    team_one = models.ForeignKey("Teams", models.DO_NOTHING)
+    team_two = models.ForeignKey("Teams",  models.DO_NOTHING, related_name="team1")
     winner = models.CharField(max_length=30, default=None, null=True)
 
     class Meta:
@@ -36,7 +37,7 @@ class Matches(models.Model):
 
 
 class PointsTable(models.Model):
-    team_name = models.ForeignKey("Teams")
+    team_name = models.ForeignKey("Teams", models.DO_NOTHING)
     points = models.IntegerField(default=0)
     total_matches = models.IntegerField(default=0)
     won_matches = models.IntegerField(default=0)
